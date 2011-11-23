@@ -14,13 +14,13 @@ var email = 'testEmail@example.com';
 
 suite.discuss('Testing the GameSaver Saving/Loading...')
         .use('localhost', 54321)
-        .setHeader('Content-Type', 'application/json')
         .post('/api/login')
           .expect(200)
           .expect('Login should return the email upon verification', function(err, res, body) {
             assert.strictEqual(JSON.parse(body), email);
           })
         .next()
+        .setHeader('Content-Type', 'application/json')
         .post('/api/set', {
           data: JSON.stringify(data),
           gameTitle: gameTitle
